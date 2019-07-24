@@ -1,1 +1,3 @@
-4. Generate API documentation using Swagger 2
+5. Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
+com.stack....exceptions package. Perform appropriate exception handling and propagation
+Back.
