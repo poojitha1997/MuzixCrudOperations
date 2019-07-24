@@ -1,6 +1,7 @@
 package com.stackroute.MuzixCrudOperations.service;
 
 import com.stackroute.MuzixCrudOperations.domain.Track;
+import com.stackroute.MuzixCrudOperations.expections.TrackAlreadyExistsException;
 import com.stackroute.MuzixCrudOperations.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class TrackServiceImpl implements TrackService
     }
 
     @Override
-    public Track saveTrack(Track track) {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException
+    {
         Track savedTrack=trackRepository.save(track);
         return savedTrack;
     }

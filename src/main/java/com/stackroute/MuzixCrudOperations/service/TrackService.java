@@ -1,11 +1,12 @@
 package com.stackroute.MuzixCrudOperations.service;
 
 import com.stackroute.MuzixCrudOperations.domain.Track;
+import com.stackroute.MuzixCrudOperations.expections.TrackAlreadyExistsException;
 
 import java.util.List;
 
 public interface TrackService {
-    public Track saveTrack(Track track);
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException;
 
     public void deleteTrack(int id);
 

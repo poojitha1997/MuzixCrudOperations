@@ -1,6 +1,7 @@
 package com.stackroute.MuzixCrudOperations.controller;
 
 import com.stackroute.MuzixCrudOperations.domain.Track;
+import com.stackroute.MuzixCrudOperations.expections.TrackAlreadyExistsException;
 import com.stackroute.MuzixCrudOperations.service.TrackService;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,14 @@ public class TrackController
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
 
-        } catch (Exception ex) {
+        } catch (TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+            ex.printStackTrace();
         }
 
         return responseEntity;
     }
+
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks()
     {
@@ -52,10 +55,19 @@ public class TrackController
     @PutMapping("track")
     public ResponseEntity<?> updateUser(@RequestBody Track track)  {
         ResponseEntity responseEntity;
-        trackService.saveTrack(track);
-        responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.CREATED);
+        try {
+
+            trackService.saveTrack(track);
+            responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.CREATED);
+        }
+        catch (TrackAlreadyExistsException ex) {
+
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+        }
+
         return responseEntity;
     }
+
     @GetMapping("trackForName/{name}")
     @Query("from Track where name=?1")
     public ResponseEntity<?> getAllTracksByName(@PathVariable(value="name") String name)
