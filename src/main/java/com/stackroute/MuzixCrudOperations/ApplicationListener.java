@@ -5,7 +5,9 @@ import com.stackroute.MuzixCrudOperations.expections.TrackAlreadyExistsException
 import com.stackroute.MuzixCrudOperations.repository.TrackRepository;
 import com.stackroute.MuzixCrudOperations.service.TrackService;
 import com.stackroute.MuzixCrudOperations.service.TrackServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +16,9 @@ public class ApplicationListener implements org.springframework.context.Applicat
 
 
     TrackService trackService;
+    @Autowired
+    Environment environment;
+
 
     public ApplicationListener(TrackService trackService) {
         this.trackService = trackService;
