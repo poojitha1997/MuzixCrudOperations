@@ -20,24 +20,20 @@ public class TrackServiceImpl implements TrackService
     }
 
     @Override
-    public Track saveTrack(Track track) throws TrackAlreadyExistsException
-    {
-        if (trackRepository.existsById(track.getId()))
-        {
-            throw new TrackAlreadyExistsException("Track already exists");
-        }
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
+        if(trackRepository.existsById(track.getId()))
+            throw new TrackAlreadyExistsException("Track Already Exists");
         Track savedTrack=trackRepository.save(track);
+        if(savedTrack==null)
+        {
+            throw new TrackAlreadyExistsException("Track cannot be empty");
+        }
 
         return savedTrack;
     }
 
     @Override
-    public void deleteTrack(int id) throws TrackNotFoundException
-    {
-        if(!trackRepository.findById(id).isPresent())
-        {
-            throw new TrackNotFoundException("No track found with this id");
-        }
+    public void deleteTrack(int id) {
         trackRepository.deleteById(id);
 
     }
@@ -49,12 +45,14 @@ public class TrackServiceImpl implements TrackService
 
     @Override
     public Track getTrackById(int id) throws TrackNotFoundException {
-        if(!trackRepository.findById(id).isPresent())
-        {
-            throw new TrackNotFoundException("No track is found by this id");
+        if(!trackRepository.findById(id).isPresent()) {
+            throw new TrackNotFoundException("No track found with this Id");
+
         }
-        Track track=trackRepository.findById(id).get();
-        return track;
+
+        else {
+            Track track = trackRepository.findById(id).get();
+            return track;        }
     }
 
     @Override
@@ -62,14 +60,15 @@ public class TrackServiceImpl implements TrackService
         Track savedTrack=trackRepository.save(track);
         return savedTrack;
     }
+
     @Override
-    public List<Track> getTrackByName(String name) throws TrackNotFoundException
-    {
-        List<Track> tracksByName = trackRepository.getTrackByName(name);
-        if(tracksByName.isEmpty())
+    public List<Track> getTrackByName(String name) throws TrackNotFoundException{
+        List<Track> tracks=trackRepository.getTrackByName(name);
+        if(tracks.isEmpty())
         {
-            throw new TrackNotFoundException("no track is found by this name");
+            throw new TrackNotFoundException("No Track found with this track name");
         }
-        return tracksByName;
+        return tracks;
     }
+
 }
