@@ -27,7 +27,7 @@ public class TrackController
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         try {
             trackService.saveTrack(track);
-            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);//status is shown as sucessfully created
 
         } catch (TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
@@ -55,7 +55,7 @@ public class TrackController
         }
         catch (TrackNotFoundException e)
         {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);// track not found status is shown
             e.printStackTrace();
         } 
         catch(Exception e)
@@ -116,7 +116,7 @@ public class TrackController
         }
         catch (TrackNotFoundException e)
         {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);// track not found exception is shown 
         }
         catch(Exception e)
         {
