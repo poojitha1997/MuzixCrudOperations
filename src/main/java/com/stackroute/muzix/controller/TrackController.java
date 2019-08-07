@@ -24,6 +24,7 @@ public class TrackController {
         this.trackService = trackService;
     }
 
+    //saving the tracks
     @PostMapping("Tracks")
     public ResponseEntity<?> saveTracks(@RequestBody List<Track> tracks) throws TrackAlreadyExistsException{
         ResponseEntity responseEntity;
@@ -50,11 +51,13 @@ public class TrackController {
 
         return responseEntity;
     }
+    //retrieving all the tracks
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks()
     {
         return new ResponseEntity<List<Track>>(trackService.getAllTracks(),HttpStatus.OK);
     }
+    //retrieving the track by id
     @GetMapping("track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id)
     {
@@ -70,6 +73,7 @@ public class TrackController {
         }
         return responseEntity;
     }
+    //deleting the track by id
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
     {
@@ -78,6 +82,7 @@ public class TrackController {
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.NO_CONTENT);
         return responseEntity;
     }
+    //updating the track by id
     @PutMapping("track")
     public ResponseEntity<?> updateUser(@RequestBody Track track)  {
         ResponseEntity responseEntity;
