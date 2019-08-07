@@ -49,6 +49,10 @@ public class TrackController {
         } catch (TrackAlreadyExistsException ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
+         catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
         return responseEntity;
     }
@@ -68,6 +72,11 @@ public class TrackController {
         {
             responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+     
         return responseEntity;
     }
     @DeleteMapping("track/{id}")
@@ -88,7 +97,10 @@ public class TrackController {
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
-
+          catch(Exception e)
+        {
+            e.printStackTrace();
+        }
             return responseEntity;
         }
 
@@ -102,6 +114,10 @@ public class TrackController {
         catch (TrackNotFoundException e)
         {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
        return responseEntity;
     }
