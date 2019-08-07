@@ -36,11 +36,13 @@ public class TrackController
     {
         return new ResponseEntity<List<Track>>(trackService.getAllTracks(),HttpStatus.OK);
     }
+        //retrieving the tracks by id
     @GetMapping("track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id)
     {
         return new ResponseEntity<Track>(trackService.getTrackById(id),HttpStatus.OK);
     }
+        //deleting the track by id
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
     {
@@ -49,6 +51,8 @@ public class TrackController
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
         return responseEntity;
     }
+    
+    //updating the track
     @PutMapping("track")
     public ResponseEntity<?> updateUser(@RequestBody Track track)  {
         ResponseEntity responseEntity;
