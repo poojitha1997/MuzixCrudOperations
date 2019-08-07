@@ -7,7 +7,7 @@ import java.util.List;
 public interface TrackService {
     public Track saveTrack(Track track);
 
-    public void deleteTrack(int id);
+    public String deleteTrack(int id);
 
     public List<Track> getAllTracks();
 
