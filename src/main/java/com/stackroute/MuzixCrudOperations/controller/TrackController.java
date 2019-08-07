@@ -31,7 +31,7 @@ public class TrackController
             responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
 
         } catch (TrackAlreadyExistsException ex) {
-            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);//track already exists status is shown
             ex.printStackTrace();
         }
         catch(Exception e)
@@ -55,7 +55,7 @@ public class TrackController
         }
         catch(TrackNotFoundException ex)
         {
-            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);// track not found exception is raised if the track doesnot exist.
             ex.printStackTrace();
         }
          catch(Exception e)
@@ -65,14 +65,14 @@ public class TrackController
         return responseEntity;
     }
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
+    public ResponseEntity<?> deleteTrackById(@PathVariable(value="id") Integer id)
     {
         trackService.deleteTrack(id);
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
         return responseEntity;
     }
     @PutMapping("track")
-    public ResponseEntity<?> updateUser(@RequestBody Track track)  {
+    public ResponseEntity<?> updateTrack(@RequestBody Track track)  {
         try {
 
             trackService.saveTrack(track);
@@ -99,7 +99,7 @@ public class TrackController
         }
         catch (TrackNotFoundException e)
         {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);//track is not found exception is raised
         }
          catch(Exception e)
         {
