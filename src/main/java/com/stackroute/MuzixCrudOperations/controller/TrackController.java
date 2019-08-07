@@ -26,10 +26,11 @@ public class TrackController
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         try {
             trackService.saveTrack(track);
-            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED); //http status is created and showed as successfully created
+            
 
         } catch (TrackAlreadyExistsException ex) {
-            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT); //http conflict is raised if track already existed. 
             ex.printStackTrace();
         }
           catch(Exception e)
@@ -54,7 +55,7 @@ public class TrackController
     public ResponseEntity<?> deleteTrackById(@PathVariable(value="id") Integer id)
     {
         trackService.deleteTrack(id);
-        responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
+        responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);//httpstatus is shown as "deleted"
         return responseEntity;
     }
         //updating the track
@@ -65,7 +66,7 @@ public class TrackController
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.OK);
         }
-        catch (TrackAlreadyExistsException ex) {
+        catch (TrackAlreadyExistsException ex) {// exception is thrown if track is already existed
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
@@ -79,8 +80,9 @@ public class TrackController
 
     @GetMapping("trackForName/{name}")
     @Query("from Track where name=?1")
-    public ResponseEntity<?> getAllTracksByName(@PathVariable(value="name") String name)
+    public ResponseEntity<?> getAllTracksByName(@PathVariable(value="name") String name) //retriving the track by name
     {
+         
         return new ResponseEntity<List<Track>>(trackService.getTrackByName(name),HttpStatus.OK);
     }
 
