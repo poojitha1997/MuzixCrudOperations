@@ -14,7 +14,8 @@ import java.util.List;
 @RequestMapping(value="api/v1")
 public class TrackController
 {
-    TrackService trackService;
+     private TrackService trackService;
+    ResponseEntity responseEntity;
 
     @Autowired
     public TrackController(TrackService trackService) {
@@ -23,7 +24,6 @@ public class TrackController
         //saving the track
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
-        ResponseEntity responseEntity;
         try {
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
@@ -32,7 +32,10 @@ public class TrackController
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
             ex.printStackTrace();
         }
-
+          catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return responseEntity;
     }
     //retrieving all the tracks
@@ -50,7 +53,6 @@ public class TrackController
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrackById(@PathVariable(value="id") Integer id)
     {
-        ResponseEntity responseEntity;
         trackService.deleteTrack(id);
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
         return responseEntity;
@@ -58,7 +60,6 @@ public class TrackController
         //updating the track
     @PutMapping("track")
     public ResponseEntity<?> updateTrack(@RequestBody Track track)  {
-        ResponseEntity responseEntity;
         try {
 
             trackService.saveTrack(track);
@@ -67,6 +68,10 @@ public class TrackController
         catch (TrackAlreadyExistsException ex) {
 
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
+        }
+         catch(Exception e)
+        {
+            e.printStackTrace();
         }
 
         return responseEntity;
