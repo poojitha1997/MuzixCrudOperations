@@ -14,7 +14,7 @@ public class TrackController
 {
     private TrackService trackService;
 
-    ResponseEntity responseEntity;
+    private ResponseEntity responseEntity;
 
     @Autowired
     public TrackController(TrackService trackService) {
