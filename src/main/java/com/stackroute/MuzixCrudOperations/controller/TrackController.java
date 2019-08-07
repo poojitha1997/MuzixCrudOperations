@@ -16,6 +16,7 @@ public class TrackController
 {
     TrackService trackService;
 
+    @Autowired
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
@@ -56,7 +57,7 @@ public class TrackController
     }
         //updating the track
     @PutMapping("track")
-    public ResponseEntity<?> updateUser(@RequestBody Track track)  {
+    public ResponseEntity<?> updateTrack(@RequestBody Track track)  {
         ResponseEntity responseEntity;
         try {
 
