@@ -25,7 +25,7 @@ public class TrackController
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         try {
             trackService.saveTrack(track);
-            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);//http status is created as succesfully created
 
         } catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
@@ -41,13 +41,13 @@ public class TrackController
     }
     //retrieving the tracks by id
     @GetMapping("track/{id}")
-    public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id)
+    public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id)//id is taken as input and track is retrieved by the id 
     {
         return new ResponseEntity<Track>(trackService.getTrackById(id),HttpStatus.OK);
     }
     //deleting the track by id
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
+    public ResponseEntity<?> deleteTrackById(@PathVariable(value="id") Integer id)
     {
         trackService.deleteTrack(id);
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
@@ -55,7 +55,7 @@ public class TrackController
     }
     //updating the track
     @PutMapping("track")
-    public ResponseEntity<?> updateUser(@RequestBody Track track)  {
+    public ResponseEntity<?> updateTrack(@RequestBody Track track)  {
         trackService.saveTrack(track);
         responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.OK);
         return responseEntity;
