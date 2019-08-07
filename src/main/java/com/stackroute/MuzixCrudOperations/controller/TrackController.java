@@ -48,7 +48,7 @@ public class TrackController
     }
         //deleting the track by id
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
+    public ResponseEntity<?> deleteTrackById(@PathVariable(value="id") Integer id)
     {
         ResponseEntity responseEntity;
         trackService.deleteTrack(id);
