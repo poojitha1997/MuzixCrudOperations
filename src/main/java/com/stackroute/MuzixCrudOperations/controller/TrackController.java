@@ -70,7 +70,7 @@ public class TrackController
         try {
 
             trackService.saveTrack(track);
-            responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.OK);
         }
         catch (TrackAlreadyExistsException ex) {
 
