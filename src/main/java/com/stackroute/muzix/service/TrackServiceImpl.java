@@ -40,8 +40,9 @@ public class TrackServiceImpl implements TrackService
     }
 
     @Override
-    public void deleteTrack(int id) {
+    public String deleteTrack(int id) {
         trackRepository.deleteById(id);
+        return "deleted";
     }
 
     @Override
@@ -66,12 +67,7 @@ public class TrackServiceImpl implements TrackService
         return savedTrack;
     }
 
-  /*  @Override
-    public List<Track> getTrackByName(String name) throws TrackNotFoundException {
-        Query query=new Query();
-        query.addCriteria(Criteria.where("name").is(name));
-        return mongoTemplate.find(query,Track.class);
-    }*/
+ 
 
     @Override
     public List<Track> getTrackByName(String name) throws TrackNotFoundException{
