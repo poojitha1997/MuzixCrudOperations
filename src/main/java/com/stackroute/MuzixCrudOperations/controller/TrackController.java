@@ -53,7 +53,7 @@ public class TrackController
     public ResponseEntity<?> updateUser(@RequestBody Track track)  {
         ResponseEntity responseEntity;
         trackService.saveTrack(track);
-        responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.CREATED);
+        responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.OK);
         return responseEntity;
     }
     @GetMapping("trackForName/{name}")
