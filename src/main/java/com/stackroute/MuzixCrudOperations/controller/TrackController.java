@@ -12,15 +12,14 @@ import java.util.List;
 @RequestMapping(value="api/v1")
 public class TrackController
 {
-    TrackService trackService;
-
+ private TrackService trackService;
+    ResponseEntity responseEntity;
     @Autowired
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
-        ResponseEntity responseEntity;
         try {
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
@@ -44,14 +43,12 @@ public class TrackController
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteuserById(@PathVariable(value="id") Integer id)
     {
-        ResponseEntity responseEntity;
         trackService.deleteTrack(id);
         responseEntity=new ResponseEntity<String>("Deleted",HttpStatus.FORBIDDEN);
         return responseEntity;
     }
     @PutMapping("track")
     public ResponseEntity<?> updateUser(@RequestBody Track track)  {
-        ResponseEntity responseEntity;
         trackService.saveTrack(track);
         responseEntity = new ResponseEntity<String>("Updated Successfully", HttpStatus.OK);
         return responseEntity;
